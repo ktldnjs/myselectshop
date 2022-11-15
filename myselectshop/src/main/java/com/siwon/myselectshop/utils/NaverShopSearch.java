@@ -1,7 +1,13 @@
 package com.siwon.myselectshop.utils;
 
+import com.siwon.myselectshop.models.ItemDto;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NaverShopSearch {
     public String search(String query) {
@@ -24,7 +30,21 @@ public class NaverShopSearch {
 
     public static void main(String[] args) {
         NaverShopSearch naverShopSearch = new NaverShopSearch();
-        naverShopSearch.search("아이맥");
+        String result = naverShopSearch.search("아이맥");
+        JSONObject rjson = new JSONObject(result);
+        // System.out.println(rjson);
+        JSONArray items = rjson.getJSONArray("items"); // rjson 에서 JSONArray를 꺼내겠다는 뜻. JSON으로 이루어진 배열을.(items가 []리스트형태로 되어있음)
+        // 키 값은 items라고 적혀있으니 items라 적는것.
+        // 변수명(items)의 형태는 JSONArray임.
+
+        List<ItemDto> itemDtoList = new ArrayList<>();
+        for (int i=0; i<items.length(); i++){
+            JSONObject itemJson = items.getJSONObject(i);
+            ItemDto itemDto = new ItemDto(itemJson);
+            itemDtoList.add(itemDto);
+        }
+
+        return itemDtoList;
     }
 }
 
