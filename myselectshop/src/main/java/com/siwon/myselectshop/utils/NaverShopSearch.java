@@ -28,9 +28,7 @@ public class NaverShopSearch {
         return response;
     }
 
-    public static void main(String[] args) {
-        NaverShopSearch naverShopSearch = new NaverShopSearch();
-        String result = naverShopSearch.search("아이맥");
+    public List<ItemDto> fromJSONtoItems(String result){
         JSONObject rjson = new JSONObject(result);
         // System.out.println(rjson);
         JSONArray items = rjson.getJSONArray("items"); // rjson 에서 JSONArray를 꺼내겠다는 뜻. JSON으로 이루어진 배열을.(items가 []리스트형태로 되어있음)
