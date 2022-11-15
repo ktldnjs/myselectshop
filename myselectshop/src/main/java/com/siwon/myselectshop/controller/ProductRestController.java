@@ -2,8 +2,11 @@ package com.siwon.myselectshop.controller;
 
 import com.siwon.myselectshop.models.Product;
 import com.siwon.myselectshop.models.ProductRepository;
+import com.siwon.myselectshop.models.ProductRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,6 +21,12 @@ public class ProductRestController {
     @GetMapping("/api/products")
     public List<Product> readProducts() {
         return productRepository.findAll();
+    }
+
+    @PostMapping("/api/products")
+    public Product createProduct(@RequestBody ProductRequestDto productRequestDto){
+        Product product = new Product(productRequestDto);
+        return productRepository.save(product);
     }
 
 
