@@ -41,6 +41,10 @@ public class Product extends Timestamped{
         this.myprice = productMypriceRequestDto.getMyprice();
     }
 
+    public void updateByItemDto(ItemDto itemDto){
+        this.lprice = itemDto.getLprice();
+    }
+
 
 
 }
