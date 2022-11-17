@@ -173,4 +173,20 @@ function setMyprice() {
      * 5, 성공적으로 등록되었음을 알리는 alert를 띄운다.
      * 6. 창을 새로고침한다. window.location.reload();
      */
+    let myprice = $('myprice').val();
+    if (myprice == ''){
+        alert("값을 입력해주세요.");
+        return;
+    }
+    $.ajax({
+        type: "PUT",
+        url: `/api/products/${targetId}`,
+        contentType: "application/json",
+        data: JSON.stringify({'myprice': myprice}),
+        success: function (response){
+            $('#container').removeClass('active');
+            alert("관심가격이 설정되었습니다.");
+            window.location.reload();
+        }
+    })
 }
